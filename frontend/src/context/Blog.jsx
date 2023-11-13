@@ -8,7 +8,7 @@ import { PublicKey, SystemProgram } from "@solana/web3.js";
 import { createContext, useContext, useEffect, useState, useMemo } from "react";
 import { getAvatarUrl } from "../functions/getAvatarUrl";
 import { getRandomName } from "../functions/getRandomName";
-import idl from "../data/idl.json";
+import idl from "../idl.json";
 import { findProgramAddressSync } from "@project-serum/anchor/dist/cjs/utils/pubkey";
 import { utf8 } from "@project-serum/anchor/dist/cjs/utils/bytes";
 
@@ -97,10 +97,12 @@ export const BlogProvider = ({ children }) => {
           .rpc();
         setInitialized(true);
       } catch (error) {
+        console.log("Error");
         console.log(error);
       } finally {
         setTransactionPending(false);
       }
+
     }
   };
 

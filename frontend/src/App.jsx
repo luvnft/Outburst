@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { Dashboard } from "./layouts";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import { BlogProvider } from "./context/BlogProvider";
+import { BlogProvider } from "./context/Blog";
 import {
   ConnectionProvider,
   WalletProvider,
