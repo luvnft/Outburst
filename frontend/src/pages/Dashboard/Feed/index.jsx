@@ -7,6 +7,7 @@ import {
 } from "../../../components/ui/card";
 import { Button } from "../../../components/ui/button";
 import { FcAddImage, FcLike } from "react-icons/fc";
+import { PostCard } from "../../../components/custom/post-card";
 
 const Feed = () => {
   return (
@@ -14,27 +15,31 @@ const Feed = () => {
       <section className="w-1/2 hidden sm:block p-4">
         <Card></Card>
       </section>
-      <section className="w-full  p-4">
-        <Card>
+      <section className="w-full p-4">  
+        <Card className="mb-3">
           <CardHeader>
             <div className="flex items-center gap-3">
               <CardTitle>
                 <div className="h-10 w-10 bg-rose-500 rounded-full"></div>
               </CardTitle>
-              <CardDescription className="border bg-zinc-100 w-full p-2 md:px-5 rounded-full md:text-base">
+              <CardDescription className="border bg-zinc-50 w-full p-2 md:px-5 rounded-full md:text-base">
                 {"What's on your mind?"}
               </CardDescription>
             </div>
           </CardHeader>
           <CardContent className="flex gap-2">
-            <Button className="hover:bg-zinc-100 text-base rounded-full flex-grow bg-white shadow-none text-black ">
-              <FcAddImage size={28} className="mr-2" />Photo/Video
+            <Button className="hover:bg-zinc-100 md:text-base rounded-full flex-grow bg-white shadow-none text-black border">
+              <FcAddImage size={24} className="mr-2" />Images
             </Button>
-            <Button className="hover:bg-zinc-100 text-base rounded-full flex-grow bg-white shadow-none text-black ">
-              <FcLike size={28} className="mr-2" />Feelings/Activity
+            <Button className="hover:bg-zinc-100 md:text-base rounded-full flex-grow bg-white shadow-none text-black border">
+              <FcLike size={24} className="mr-2" />Feelings
             </Button>
           </CardContent>
         </Card>
+
+        <PostCard name="Lirae Que Data" body="Hello world my name is lirae Hello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is lirae" title="sad"/>
+       
+       
       </section>
       <section className="w-1/2 hidden lg:block p-4">
         <Card></Card>

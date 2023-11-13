@@ -9,8 +9,8 @@ import {
 
 const Dashboard = () => {
   return (
-    <main className="h-screen w-screen bg-zinc-100">
-      <header className="h-16 md:h-20 bg-white shadow-md px-4">
+    <main className="h-full">
+      <header className="h-16 md:h-20 shadow-md px-4 sticky top-0">
         <div className="sm:container mx-auto flex items-center h-full justify-between">
           <h1 className="text-2xl md:text-4xl font-extrabold">
             Out
