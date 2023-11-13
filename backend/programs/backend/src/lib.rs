@@ -15,8 +15,16 @@ pub mod main {
     use super::*;
 
     pub fn init_user(ctx : Context<InitUser>, name : String, avatar : String) -> Result<()>{
+        let user_account = &mut ctx.accounts.user_account;
+        let authority = &mut ctx.accounts.authority;
 
+        user_account.name = name;
+        user_account.avatar = avatar;
+        user_account.post_count = 0;
+        user_account.last_post_id = 0;
+        user_account.authority = authority.key();
         
+        Ok(())
     }
 
     pub fn create_post(){
