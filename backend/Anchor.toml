@@ -11,7 +11,7 @@ backend = "92TRmey1biFtJMR8oMCMd2oZQmfiAF5CR3zvTQPixLCp"
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "Localnet"
+cluster = "Devnet"
 wallet = "/home/data/.config/solana/id.json"
 
 [scripts]
