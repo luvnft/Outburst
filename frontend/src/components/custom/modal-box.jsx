@@ -14,3 +14,9 @@ export const ModalBoxHeader = () => {
 };
 
 
+export const ModalBoxBody = () => {
+    return (
+        <>
+        </>
+    );
+};
