@@ -1,8 +1,11 @@
+import { Dashboard } from "./layouts";
+import { Routes, Route } from "react-router-dom";
+
 const App = () => {
     return (
-        <>
-            <h1 className="text-3xl underline">Hello World</h1>
-        </>
+        <Routes>
+            <Route path="/*" element={Dashboard} />
+        </Routes>
     );
 };
 
