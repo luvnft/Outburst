@@ -5,6 +5,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator
 } from "../components/ui/dropdown-menu";
 
 const Dashboard = () => {
@@ -24,6 +25,7 @@ const Dashboard = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent className="relative right-2 md:right-0">
                 <DropdownMenuItem className="md:text-base font-medium">Connect Wallet</DropdownMenuItem>
+                <DropdownMenuSeparator />
                 <DropdownMenuItem className="text-red-500 md:text-base font-medium">Logout</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

@@ -6,9 +6,9 @@ import {
 } from "@solana/wallet-adapter-react";
 import { PublicKey, SystemProgram } from "@solana/web3.js";
 import { createContext, useContext, useEffect, useState, useMemo } from "react";
-import { getAvatarUrl } from "src/functions/getAvatarUrl";
-import { getRandomName } from "src/functions/getRandomName";
-import idl from "src/idl.json";
+import { getAvatarUrl } from "../functions/getAvatarUrl";
+import { getRandomName } from "../functions/getRandomName";
+import idl from "../data/idl.json";
 import { findProgramAddressSync } from "@project-serum/anchor/dist/cjs/utils/pubkey";
 import { utf8 } from "@project-serum/anchor/dist/cjs/utils/bytes";
 
