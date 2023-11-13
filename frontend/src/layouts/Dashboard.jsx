@@ -4,14 +4,12 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../components/ui/dropdown-menu";
 
 const Dashboard = () => {
   return (
-    <main className="h-full w-screen bg-zinc-100">
+    <main className="h-screen w-screen bg-zinc-100">
       <header className="h-16 md:h-20 bg-white shadow-md px-4">
         <div className="sm:container mx-auto flex items-center h-full justify-between">
           <h1 className="text-2xl md:text-4xl font-extrabold">
@@ -25,10 +23,8 @@ const Dashboard = () => {
                 <div className="h-8 md:h-10 w-8 md:w-10 bg-rose-500 rounded-full"></div>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="relative right-2 md:right-0">
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Connect Wallet</DropdownMenuItem>
-                <DropdownMenuItem>Logout</DropdownMenuItem>
+                <DropdownMenuItem className="md:text-base font-medium">Connect Wallet</DropdownMenuItem>
+                <DropdownMenuItem className="text-red-500 md:text-base font-medium">Logout</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </span>
