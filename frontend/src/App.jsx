@@ -1,12 +1,14 @@
 import { Dashboard } from "./layouts";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 const App = () => {
-    return (
-        <Routes>
-            <Route path="/*" element={<Dashboard />} />
-        </Routes>
-    );
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/*" element={<Dashboard />} />
+      </Routes>
+    </BrowserRouter>
+  );
 };
 
 export default App;
