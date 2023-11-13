@@ -6,7 +6,14 @@ import {
   CardHeader,
   CardTitle,
 } from "../../../components/ui/card";
-import { Input } from "../../../components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../../../components/ui/select";
+// import { Input } from "../../../components/ui/input";
 import { Label } from "../../../components/ui/label";
 import { Button } from "../../../components/ui/button";
 import { FcAddImage, FcLike } from "react-icons/fc";
@@ -14,6 +21,7 @@ import { RxCross1 } from "react-icons/rx";
 import { PostCard } from "../../../components/custom/post-card";
 import { ModalBox } from "../../../components/custom/modal-box";
 import { usePost } from "../../../hooks";
+import { Textarea } from "../../../components/ui/textarea";
 
 const Feed = () => {
   const [isShowAddPost, setShowAddPost] = useState(false);
@@ -25,7 +33,6 @@ const Feed = () => {
 
   return (
     <section className="mx-auto sm:container p-4 md:p-6 flex">
-
       {/* Modal Box for Creating Post */}
       <ModalBox isVisible={isShowAddPost} onExit={() => setShowAddPost(false)}>
         <CardHeader>
@@ -41,27 +48,56 @@ const Feed = () => {
         <CardContent>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
-              <Label htmlFor="title">{"What are you feeling right now?"}</Label>
-              <Input
+              <Label htmlFor="title" className="mb-2">
+                {"What are you feeling right now?"}
+              </Label>
+              {/* <Input
                 name="title"
                 id="title"
                 values={values.title}
                 handleBlur={handleBlur}
                 handleChange={handleChange}
-                className="bg-zinc-100"
-              />
+                placeholder="Happy"
+                className="bg-zinc-100 h-10 md:h-12"
+                minLength={2}
+                maxLength={50}
+              /> */}
+              <Select>
+                <SelectTrigger className="w-full h-10 md:h-12 bg-zinc-100">
+                  <SelectValue
+                    placeholder="Tell me..."
+                    name="title"
+                    id="title"
+                    handleBlur={handleBlur}
+                    handleChange={handleChange}
+                    value={values.title}
+                  />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Sad">Sad</SelectItem>
+                  <SelectItem value="Happy">Happy</SelectItem>
+                  <SelectItem value="Angry">Angry</SelectItem>
+                  <SelectItem value="Scared">Scared</SelectItem>
+                  <SelectItem value="Disgust">Disgusted</SelectItem>
+                </SelectContent>
+              </Select>
+
               <span className="text-red-500">
                 {errors.title && touched.title && errors.title}
               </span>
             </div>
             <div className="mb-8">
-              <Label htmlFor="content">{"We're here to listen..."}</Label>
-              <Input
+              <Label htmlFor="content" className="2">
+                {"We're here to listen..."}
+              </Label>
+              <Textarea
                 name="content"
                 id="content"
                 values={values.content}
                 handleBlur={handleBlur}
                 handleChange={handleChange}
+                className="bg-zinc-100 h-32"
+                placeholder="Keep holding up"
               />
               <span className="text-red-500">
                 {errors.content && touched.content && errors.content}
@@ -76,7 +112,9 @@ const Feed = () => {
                   <div className="w-6 h-6 rounded-full border-2 border-white border-t-transparent animate-spin inline-block mr-2"></div>
                   Loading...
                 </>
-              ) : "Submit"}
+              ) : (
+                "Submit"
+              )}
             </Button>
           </form>
         </CardContent>
@@ -100,7 +138,6 @@ const Feed = () => {
       </ModalBox>
 
       <section className="w-1/2 hidden sm:block p-4">
-        
         {/* Still thinking */}
         <Card></Card>
       </section>
@@ -146,7 +183,6 @@ const Feed = () => {
         />
       </section>
       <section className="w-1/2 hidden lg:block p-4">
-
         {/* GitHub Owner here */}
         <Card></Card>
       </section>

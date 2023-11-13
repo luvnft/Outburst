@@ -1,12 +1,10 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "../ui/card";
+import { Card } from "../ui/card";
 
 export const ModalBox = ({ isVisible, onExit, children }) => {
+  const handleSectionClick = (e) => {
+    e.stopPropagation();
+  };
+
   return (
     <>
       {isVisible ? (
@@ -15,9 +13,7 @@ export const ModalBox = ({ isVisible, onExit, children }) => {
           onClick={onExit}
         >
           <div className="absolute top-40w w-96 ">
-            <Card>
-                {children}
-            </Card>
+            <Card onClick={handleSectionClick}>{children}</Card>
           </div>
         </section>
       ) : null}
