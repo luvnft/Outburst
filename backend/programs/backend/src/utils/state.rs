@@ -12,7 +12,7 @@ pub struct User {
 
 #[account]
 #[derive(Default)]
-pub struct Post {
+pub struct Post{
     pub id : u8,
     pub title : String,
     pub content : String,

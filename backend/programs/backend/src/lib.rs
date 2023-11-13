@@ -64,10 +64,10 @@ pub struct InitUser<'info>{
 
     #[account(mut)]
     pub authority: Signer<'info>,
-    pub systemm_program: Program<'info, System>
+    pub system_program: Program<'info, System>
 }
 
-#[derive(Account)]
+#[derive(Accounts)]
 #[instruction()]
 pub struct CreatePost<'info>{
     #[account(
