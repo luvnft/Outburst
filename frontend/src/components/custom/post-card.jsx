@@ -12,3 +12,10 @@ export const PostCardHeader = () => {
         </>
     );
 };
+
+export const PostCardBody = () => {
+    return (
+        <>
+        </>
+    );
+};
