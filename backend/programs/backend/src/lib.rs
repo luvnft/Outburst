@@ -48,3 +48,31 @@ pub struct InitUser<'info>{
     pub authority: Signer<'info>,
     pub systemm_program: Program<'info, System>
 }
+
+#[derive(Account)]
+#[instruction()]
+pub struct CreatePost<'info>{
+    #[account(
+        init,
+        seeds = [
+            POST_SEED, authority.key().as_ref(), 
+            &[user_account.last_post_id as u8].as_ref()
+        ],
+        bump,
+        payer = authority,
+        space = 2376 + 8
+    )]
+    pub post_account: Account<'info, Post>,
+    
+    #[account(
+        mut,
+        seeds = [USER_SEED, authority.key().as_ref()],
+        bump,
+        has_one = authority
+    )]
+    pub user_account : Account<'info, User>,
+
+    #[account(mut)]
+    pub authority : Signer<'info>,
+    pub system_program : Program<'info, System>
+}
