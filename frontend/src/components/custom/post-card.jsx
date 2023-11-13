@@ -4,3 +4,11 @@ export const PostCard = () => {
         </>
     );
 };
+
+
+export const PostCardHeader = () => {
+    return (
+        <>
+        </>
+    );
+};
