@@ -9,3 +9,13 @@ pub struct User {
     pub last_post_id : u8,
     pub post_count : u8
 }
+
+#[account]
+#[derive(Default)]
+pub struct Post {
+    pub id : u8,
+    pub title : String,
+    pub content : String,
+    pub user : Pubkey,
+    pub authority : Pubkey
+}
