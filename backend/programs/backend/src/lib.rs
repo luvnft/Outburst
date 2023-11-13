@@ -23,7 +23,7 @@ pub mod main {
         user_account.post_count = 0;
         user_account.last_post_id = 0;
         user_account.authority = authority.key();
-        
+
         Ok(())
     }
 
