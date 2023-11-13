@@ -14,8 +14,9 @@ declare_id!("92TRmey1biFtJMR8oMCMd2oZQmfiAF5CR3zvTQPixLCp");
 pub mod main {
     use super::*;
 
-    pub fn init_user(){
+    pub fn init_user(ctx : Context<InitUser>, name : String, avatar : String) -> Result<()>{
 
+        
     }
 
     pub fn create_post(){
