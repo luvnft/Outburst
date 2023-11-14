@@ -45,7 +45,7 @@ const Feed = () => {
   const { connected } = useWallet();
 
   return (
-    <section className="mx-auto sm:container p-4 md:p-6 flex">
+    <section className="mx-auto sm:container flex">
       {/* Modal Box for Creating Post */}
       <ModalBox isVisible={isShowAddPost} onExit={() => setShowAddPost(false)}>
         {connected ? (
