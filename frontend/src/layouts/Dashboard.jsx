@@ -1,5 +1,5 @@
-import Routers from "../Routers";
 import { Routes, Route, Navigate } from "react-router-dom";
+import { IoWallet, IoLogOut } from "react-icons/io5";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,29 +7,23 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from "../components/ui/dropdown-menu";
-
-import { useWallet } from "@solana/wallet-adapter-react";
-import { PhantomWalletName } from "@solana/wallet-adapter-wallets";
-import { useEffect, useState } from "react";
-import { useBlog } from "../context/Blog";
+import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar";
+import { usePhantom } from "../hooks";
+import Routers from "../Routers";
 
 const Dashboard = () => {
-  const [connecting, setConnecting] = useState(false);
-  const { connected, select } = useWallet();
-  const { user, disconnectWallet } = useBlog();
+  const {
+    connecting,
+    connected,
+    user,
+    disconnectWallet,
+    publicKey,
+    onConnect,
+  } = usePhantom();
 
-  const onConnect = () => {
-    setConnecting(true);
-    select(PhantomWalletName);
-  };
-
-  useEffect(() => {
-    if (user) {
-      setConnecting(false);
-    }
-  }, [user]);
   return (
     <main className="h-full">
+      {/* Navigation Bar */}
       <header className="h-16 md:h-20 shadow-md px-4 sticky top-0 bg-white z-20">
         <div className="sm:container mx-auto flex items-center h-full justify-between">
           <h1 className="text-2xl md:text-4xl font-extrabold">
@@ -37,27 +31,31 @@ const Dashboard = () => {
             <span className="text-rose-500">Burst</span>
           </h1>
           <span className="flex items-center gap-3">
-            <p className="hidden md:inline-block font-medium">
-              {connected ? user?.name ?? "Guest User" : "Welcome User"}
+            <p className="hidden md:inline-block font-medium text-end">
+              {connected ? user?.name : "Welcome"}
             </p>
             <DropdownMenu>
               <DropdownMenuTrigger>
-                <img
-                  src={
-                    user?.avatar ??
-                    "https://gravatar.com/avatar/$%7Bmd4(key)z?s=400&d=robohash&r=x"
-                  }
-                  alt="avatar"
-                  className="h-8 md:h-10 w-8 md:w-10 bg-rose-400 rounded-full"
-                />
+                <Avatar className="bg-zinc-100 border">
+                  <AvatarImage
+                    src={
+                      user?.avatar ??
+                      "https://gravatar.com/avatar/$%7Bmd4(key)z?s=400&d=robohash&r=x"
+                    }
+                  />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="relative right-2 md:right-0">
                 <DropdownMenuItem
-                  className="md:text-base font-medium"
+                  className="md:text-base font-medium flex items-center gap-1"
                   onClick={connected ? null : onConnect}
                 >
+                  <IoWallet size={20} />
                   {connected ? (
-                    <>Wallet Connected</>
+                    <p className="text-sm text-zinc-500">
+                      {publicKey?.toBase58().substring(0, 12)}...
+                    </p>
                   ) : (
                     <>
                       {connecting ? (
@@ -66,26 +64,29 @@ const Dashboard = () => {
                           Loading...
                         </>
                       ) : (
-                        "Connect Wallet"
+                        "Connect to Wallet"
                       )}
                     </>
                   )}
                 </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem
-                  onClick={disconnectWallet}
-                  className={`${
-                    connected ? "block" : "hidden"
-                  } text-red-500 md:text-base font-medium`}
-                >
-                  Logout
-                </DropdownMenuItem>
+                {connected ? (
+                  <>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem
+                      onClick={disconnectWallet}
+                      className="text-red-500 md:text-base font-medium flex items-center gap-1 hover:focus:bg-red-50 hover:focus:text-red-600"
+                    >
+                      <IoLogOut size={20} /> Logout
+                    </DropdownMenuItem>
+                  </>
+                ) : null}
               </DropdownMenuContent>
             </DropdownMenu>
           </span>
         </div>
       </header>
 
+      {/* News Feed */}
       <Routes>
         <Route path="*" element={<Navigate exact path="/home" />} />
         {Routers.map(
