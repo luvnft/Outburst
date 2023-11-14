@@ -1,5 +1,11 @@
+import { useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { IoWallet, IoLogOut } from "react-icons/io5";
+import {
+  IoWallet,
+  IoLogOut,
+  IoPersonCircle,
+  IoMailUnread,
+} from "react-icons/io5";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,8 +17,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar";
 import { usePhantom } from "../hooks";
 import Routers from "../Routers";
 import { capitalizeString } from "../functions/capitalizeString";
+import { ModalBox } from "../components/custom/modal-box";
+import { OwnerSection, ProfileSection } from "../pages/Dashboard/Feed/sections";
 
 const Dashboard = () => {
+  const [showProfile, setShowProfile] = useState(false);
+  const [showContact, setShowContact] = useState(false);
+
   const {
     connecting,
     connected,
@@ -24,6 +35,21 @@ const Dashboard = () => {
 
   return (
     <main className="h-full">
+      <ModalBox isVisible={showProfile} onExit={() => setShowProfile(false)}>
+        <ProfileSection
+          image={
+            user?.avatar ??
+            "https://gravatar.com/avatar/$%7Bmd4(key)z?s=400&d=robohash&r=x"
+          }
+          name={user?.name ?? "John Doe"}
+          publicKey={publicKey?.toBase58() ?? null}
+        />
+      </ModalBox>
+
+      <ModalBox isVisible={showContact} onExit={() => setShowContact(false)}>
+        <OwnerSection />
+      </ModalBox>
+
       {/* Navigation Bar */}
       <header className="h-16 md:h-20 shadow-md px-4 sticky top-0 bg-white z-20">
         <div className="sm:container mx-auto flex items-center h-full justify-between">
@@ -32,8 +58,10 @@ const Dashboard = () => {
             <span className="text-rose-500">Burst</span>
           </h1>
           <span className="flex items-center gap-3">
-            <p className="hidden md:inline-block font-medium text-end">
-              {connected ? capitalizeString(user?.name ?? "John Doe") : "Welcome"}
+            <p className="hidden sm:inline-block font-medium text-end">
+              {connected
+                ? capitalizeString(user?.name ?? "John Doe")
+                : "Welcome"}
             </p>
             <DropdownMenu>
               <DropdownMenuTrigger>
@@ -69,6 +97,20 @@ const Dashboard = () => {
                       )}
                     </>
                   )}
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  className="sm:hidden text-base font-medium flex items-center gap-1"
+                  onClick={() => setShowProfile(true)}
+                >
+                  <IoPersonCircle size={20} />
+                  Profile
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  className="lg:hidden text-base font-medium flex items-center gap-1"
+                  onClick={() => setShowContact(true)}
+                >
+                  <IoMailUnread size={20} />
+                  Contact Me
                 </DropdownMenuItem>
                 {connected ? (
                   <>
