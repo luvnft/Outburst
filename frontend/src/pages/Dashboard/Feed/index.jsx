@@ -47,7 +47,6 @@ const Feed = () => {
     initialized,
     initUser,
     createPost,
-    showModal,
     setShowModal,
   } = useBlog();
   const { connected, select } = useWallet();
@@ -211,7 +210,7 @@ const Feed = () => {
         </Card>
 
         {/* List of Blog Post */}
-        <PostCard
+        {/* <PostCard
           image={
             user?.avatar ??
             "https://gravatar.com/avatar/$%7Bmd4(key)z?s=400&d=robohash&r=x"
@@ -219,7 +218,7 @@ const Feed = () => {
           name={user?.name ?? "Guest User"}
           body="Hello world my name is lirae Hello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is lirae"
           title="sad"
-        />
+        /> */}
       </section>
       <section className="w-1/2 hidden lg:block p-4">
         {/* GitHub Owner here */}

@@ -107,6 +107,12 @@ export const BlogProvider = ({ children }) => {
 
     const disconnectWallet = () => {
         disconnect();
+        setInitialized(false);
+        setUser(null);
+        setPosts([]);
+        setSuccess(false);
+        setTransactionPending(false);
+        setLastPostId(0);
     }
 
     const createPost = async (content) => {

@@ -16,7 +16,7 @@ import { useBlog } from "../context/Blog";
 const Dashboard = () => {
   const [connecting, setConnecting] = useState(false);
   const { connected, select } = useWallet();
-  const { user } = useBlog();
+  const { user, disconnectWallet } = useBlog();
 
   const onConnect = () => {
     setConnecting(true);
@@ -67,6 +67,7 @@ const Dashboard = () => {
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem
+                  onClick={disconnectWallet}
                   className={`${
                     connected ? "block" : "hidden"
                   } text-red-500 md:text-base font-medium`}
