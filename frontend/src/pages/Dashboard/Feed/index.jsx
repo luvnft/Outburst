@@ -15,7 +15,7 @@ import { Button } from "../../../components/ui/button";
 import { FcAddImage, FcLike } from "react-icons/fc";
 import { PostCard } from "../../../components/custom/post-card";
 import { useCreatePost, usePhantom } from "../../../hooks";
-import { CreatePost, ConnectWallet} from "./components";
+import { CreatePost, ConnectWallet } from "./components";
 import { OwnerSection, ProfileSection } from "./sections";
 
 const Feed = () => {
@@ -23,13 +23,14 @@ const Feed = () => {
   const [isShowSoonPost, setShowSoonPost] = useState(false);
   const [isLoading, formik] = useCreatePost();
 
-  const { user, posts, connected, publicKey, transactionPending } = usePhantom();
+  const { user, posts, connected, publicKey, transactionPending } =
+    usePhantom();
 
   useEffect(() => {
     if (!transactionPending) {
       setShowAddPost(false);
     }
-  }, [transactionPending])
+  }, [transactionPending]);
 
   return (
     <section className="mx-auto sm:container flex">
@@ -104,18 +105,18 @@ const Feed = () => {
             </Button>
           </CardContent>
         </Card>
-
         {/* List of Blog Post */}
-        {posts.map((item) => (
-          <PostCard
-            key={item.account.id}
-            body={item.account.content}
-            title={item.account.title}
-          />
-        ))}
-
-        {connected ? null : (
+                     
+        {posts.length === 0 ? (
           <p className="text-center font-medium p-8">No Available Posts</p>
+        ) : (
+          posts.map((item) => (
+            <PostCard
+              key={item.account.id}
+              body={item.account.content}
+              title={item.account.title}
+            />
+          ))
         )}
       </section>
       <section className="w-1/2 hidden lg:block p-4">
