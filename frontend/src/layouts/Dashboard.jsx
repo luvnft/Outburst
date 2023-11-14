@@ -30,7 +30,7 @@ const Dashboard = () => {
   }, [user]);
   return (
     <main className="h-full">
-      <header className="h-16 md:h-20 shadow-md px-4 sticky top-0">
+      <header className="h-16 md:h-20 shadow-md px-4 sticky top-0 bg-white z-20">
         <div className="sm:container mx-auto flex items-center h-full justify-between">
           <h1 className="text-2xl md:text-4xl font-extrabold">
             Out
@@ -56,13 +56,19 @@ const Dashboard = () => {
                   className="md:text-base font-medium"
                   onClick={connected ? null : onConnect}
                 >
-                  {connecting ? (
-                    <>
-                      <div className="w-6 h-6 rounded-full border-2 border-black border-t-transparent animate-spin inline-block mr-2"></div>
-                      Loading...
-                    </>
+                  {connected ? (
+                    <>Wallet Connected</>
                   ) : (
-                    "Connect Wallet"
+                    <>
+                      {connecting ? (
+                        <>
+                          <div className="w-6 h-6 rounded-full border-2 border-black border-t-transparent animate-spin inline-block mr-2"></div>
+                          Loading...
+                        </>
+                      ) : (
+                        "Connect Wallet"
+                      )}
+                    </>
                   )}
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />

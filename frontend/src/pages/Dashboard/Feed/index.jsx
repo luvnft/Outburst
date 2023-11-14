@@ -19,7 +19,7 @@ import { FcAddImage, FcLike } from "react-icons/fc";
 import { RxCross1 } from "react-icons/rx";
 import { PostCard } from "../../../components/custom/post-card";
 import { ModalBox } from "../../../components/custom/modal-box";
-import { usePost } from "../../../hooks";
+import { useCreatePost } from "../../../hooks";
 import { Textarea } from "../../../components/ui/textarea";
 
 import { useWallet } from "@solana/wallet-adapter-react";
@@ -39,17 +39,10 @@ const Feed = () => {
       handleChange,
       setFieldValue,
     },
-  ] = usePost();
+  ] = useCreatePost();
 
-  const {
-    user,
-    posts,
-    initialized,
-    initUser,
-    createPost,
-    setShowModal,
-  } = useBlog();
-  const { connected, select } = useWallet();
+  const { user, posts } = useBlog();
+  const { connected } = useWallet();
 
   return (
     <section className="mx-auto sm:container p-4 md:p-6 flex">
@@ -88,7 +81,7 @@ const Feed = () => {
                       <SelectItem value="Happy">Happy</SelectItem>
                       <SelectItem value="Angry">Angry</SelectItem>
                       <SelectItem value="Scared">Scared</SelectItem>
-                      <SelectItem value="Disgust">Disgusted</SelectItem>
+                      <SelectItem value="Disgust">Disgust</SelectItem>
                     </SelectContent>
                   </Select>
 
@@ -153,7 +146,9 @@ const Feed = () => {
         <CardHeader>
           <div className="font-medium flex items-center justify-between">
             <p className="text-lg">
-              {(connected) ? "Feature is comming soon" : "Connect to Phantom Wallet"}
+              {connected
+                ? "Feature is comming soon"
+                : "Connect to Phantom Wallet"}
             </p>
             <RxCross1
               size={32}
@@ -210,15 +205,13 @@ const Feed = () => {
         </Card>
 
         {/* List of Blog Post */}
-        {/* <PostCard
-          image={
-            user?.avatar ??
-            "https://gravatar.com/avatar/$%7Bmd4(key)z?s=400&d=robohash&r=x"
-          }
-          name={user?.name ?? "Guest User"}
-          body="Hello world my name is lirae Hello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is lirae"
-          title="sad"
-        /> */}
+        {posts.map((item) =>
+            <PostCard
+              key={item.account.id}
+              body={item.account.content}
+              title={item.account.title}
+            />
+        )}
       </section>
       <section className="w-1/2 hidden lg:block p-4">
         {/* GitHub Owner here */}
