@@ -76,7 +76,7 @@ const Feed = () => {
                     name="title"
                     id="title"
                   >
-                    <SelectTrigger className="w-full h-10 md:h-12 bg-zinc-100">
+                    <SelectTrigger className="w-full h-10 md:h-12 bg-zinc-100 md:text-base">
                       <SelectValue placeholder="Mix Emotions" />
                     </SelectTrigger>
                     <SelectContent>
@@ -112,7 +112,7 @@ const Feed = () => {
                     values={values.content}
                     onBlur={handleBlur}
                     onChange={handleChange}
-                    className="bg-zinc-100 h-52 max-h-52"
+                    className="bg-zinc-100 h-52 max-h-52 md:text-base"
                     placeholder="Keep holding up"
                   />
                   <span className="text-red-500 text-sm font-medium ">
