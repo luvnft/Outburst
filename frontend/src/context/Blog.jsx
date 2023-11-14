@@ -78,6 +78,13 @@ export const BlogProvider = ({ children }) => {
 
   const disconnectWallet = () => {
     disconnect();
+
+    setUser({});
+    setInitialized(false);
+    setPosts([]);
+    setTransactionPending(false);
+    setShowModal(false);
+    setLastPostId(0);
   };
 
   const initUser = async () => {

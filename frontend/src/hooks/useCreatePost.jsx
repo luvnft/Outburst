@@ -18,7 +18,7 @@ const useCreatePost = () => {
       setTimeout(() => {
         createPost(values.title, values.content);
         setLoading(false);
-      }, 1000);
+      }, 2000);
     },
     validationSchema: Yup.object({
       title: Yup.string().required("It's okay, just vent it."),
