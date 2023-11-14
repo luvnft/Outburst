@@ -11,20 +11,20 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "../ui/tooltip";
-
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Badge } from "../ui/badge";
-
 
 import { getAvatarUrl } from "../../functions/getAvatarUrl";
 import { getRandomName } from "../../functions/getRandomName";
+import { capitalizeString } from "../../functions/capitalizeString";
 import { useEffect, useState } from "react";
 
 const colors = {
-  "Happy" : ["bg-yellow-50", "bg-yellow-400", "bg-yellow-500", "bg-yellow-600"],
-  "Sad" : ["bg-blue-50", "bg-blue-400", "bg-blue-500", "bg-blue-600"],
-  "Angry" : ["bg-red-50", "bg-red-400", "bg-red-500", "bg-red-600"],
-  "Scared" : ["bg-violet-50", "bg-violet-400", "bg-violet-500", "bg-violet-600"],
-  "Disgust" : ["bg-green-50", "bg-green-400", "bg-green-500", "bg-green-600"]
+  Happy: ["bg-yellow-50", "bg-yellow-500", "bg-yellow-600"],
+  Sad: ["bg-blue-50", "bg-blue-500", "bg-blue-600"],
+  Angry: ["bg-red-50", "bg-red-500", "bg-red-600"],
+  Scared: ["bg-violet-50", "bg-violet-500", "bg-violet-600"],
+  Disgust: ["bg-green-50", "bg-green-500", "bg-green-600"],
 };
 
 export const PostCard = ({ title, body }) => {
@@ -34,22 +34,20 @@ export const PostCard = ({ title, body }) => {
   useEffect(() => {
     const gname = getRandomName();
     const gimage = getAvatarUrl(name);
-    setName(gname);
-    setImage(gimage);
-  }, [])
 
-  
+    setName(capitalizeString(gname));
+    setImage(gimage);
+  }, []);
 
   return (
     <Card className="mb-2">
       <CardHeader>
         <div className="flex items-center gap-2">
           <CardTitle>
-            <img
-              src={image}
-              alt="avatar"
-              className="h-8 md:h-10 w-8 md:w-10 bg-rose-400 rounded-full"
-            />
+            <Avatar className="bg-zinc-100 border">
+              <AvatarImage src={image} />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
           </CardTitle>
           <CardDescription className="text-black md:text-base font-medium">
             {name}
@@ -63,13 +61,16 @@ export const PostCard = ({ title, body }) => {
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger>
-                  <Badge className={`${colors[title][2]} hover:${colors[title][3]} rounded-full `}>
+                  <Badge
+                    className={`${colors[title][1]} hover:${colors[title][1]} rounded-full `}
+                  >
                     {title}
                   </Badge>
                 </TooltipTrigger>
                 <TooltipContent className={` ${colors[title][2]} text-white`}>
                   <p className="font-bold">
-                    {name} <span className="font-normal">is feeling</span> {title}
+                    {name} <span className="font-normal">is feeling</span>{" "}
+                    {title}
                   </p>
                 </TooltipContent>
               </Tooltip>
