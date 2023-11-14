@@ -9,7 +9,7 @@ export const ModalBox = ({ isVisible, onExit, children }) => {
     <>
       {isVisible ? (
         <section
-          className="fixed top-0 left-0 z-20 bg-[#00000059] w-screen h-screen flex items-center justify-center backdrop-blur-sm"
+          className="fixed top-0 left-0 z-50 bg-[#00000059] w-screen h-screen flex items-center justify-center backdrop-blur-sm"
           onClick={onExit}
         >
           <div className="absolute top-40 w-full p-4 sm:p-0 max-w-[24rem]">
