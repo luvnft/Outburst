@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
@@ -23,12 +23,19 @@ const Feed = () => {
   const [isShowSoonPost, setShowSoonPost] = useState(false);
   const [isLoading, formik] = useCreatePost();
 
-  const { user, posts, connected, publicKey } = usePhantom();
+  const { user, posts, connected, publicKey, transactionPending } = usePhantom();
+
+  useEffect(() => {
+    if (!transactionPending) {
+      setShowAddPost(false);
+    }
+  }, [transactionPending])
 
   return (
     <section className="mx-auto sm:container flex">
       {/* Modal Box for Creating Post */}
       <CreatePost
+        transactionPending={transactionPending}
         isLoading={isLoading}
         formik={formik}
         connected={connected}

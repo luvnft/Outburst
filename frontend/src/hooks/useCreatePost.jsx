@@ -14,7 +14,6 @@ const useCreatePost = () => {
     },
     onSubmit: (values) => {
       setLoading(true);
-      console.log(values);
       setTimeout(() => {
         createPost(values.title, values.content);
         setLoading(false);

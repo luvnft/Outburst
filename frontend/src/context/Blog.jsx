@@ -30,7 +30,6 @@ export const BlogProvider = ({ children }) => {
   const [initialized, setInitialized] = useState(false);
   const [posts, setPosts] = useState([]);
   const [transactionPending, setTransactionPending] = useState(false);
-  const [showModal, setShowModal] = useState(false);
   const [lastPostId, setLastPostId] = useState();
 
   const anchorWallet = useAnchorWallet();
@@ -83,7 +82,6 @@ export const BlogProvider = ({ children }) => {
     setInitialized(false);
     setPosts([]);
     setTransactionPending(false);
-    setShowModal(false);
     setLastPostId(0);
   };
 
@@ -142,7 +140,6 @@ export const BlogProvider = ({ children }) => {
           })
           .rpc();
 
-        setShowModal(false);
       } catch (error) {
         console.error(error);
       } finally {
@@ -154,14 +151,13 @@ export const BlogProvider = ({ children }) => {
   return (
     <BlogContext.Provider
       value={{
+        transactionPending,
         disconnectWallet,
         user,
         posts,
         initialized,
         initUser,
         createPost,
-        showModal,
-        setShowModal,
       }}
     >
       {children}
