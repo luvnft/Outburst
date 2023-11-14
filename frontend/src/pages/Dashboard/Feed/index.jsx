@@ -27,7 +27,7 @@ import { ModalBox } from "../../../components/custom/modal-box";
 import { useCreatePost, usePhantom } from "../../../hooks";
 import { Textarea } from "../../../components/ui/textarea";
 
-import { MainSection, OwnerSection, ProfileSection } from "./sections";
+import { OwnerSection, ProfileSection } from "./sections";
 
 const Feed = () => {
   const [isShowAddPost, setShowAddPost] = useState(false);
