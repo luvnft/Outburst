@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -13,7 +13,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../../components/ui/select";
-// import { Input } from "../../../components/ui/input";
 import { Label } from "../../../components/ui/label";
 import { Button } from "../../../components/ui/button";
 import { FcAddImage, FcLike } from "react-icons/fc";
@@ -23,101 +22,128 @@ import { ModalBox } from "../../../components/custom/modal-box";
 import { usePost } from "../../../hooks";
 import { Textarea } from "../../../components/ui/textarea";
 
+import { useWallet } from "@solana/wallet-adapter-react";
+import { useBlog } from "../../../context/Blog";
+
 const Feed = () => {
   const [isShowAddPost, setShowAddPost] = useState(false);
   const [isShowSoonPost, setShowSoonPost] = useState(false);
   const [
     isLoading,
-    { errors, values, touched, handleSubmit, handleBlur, handleChange },
+    {
+      errors,
+      values,
+      touched,
+      handleSubmit,
+      handleBlur,
+      handleChange,
+      setFieldValue,
+    },
   ] = usePost();
+
+  const {
+    user,
+    posts,
+    initialized,
+    initUser,
+    createPost,
+    showModal,
+    setShowModal,
+  } = useBlog();
+  const { connected, select } = useWallet();
 
   return (
     <section className="mx-auto sm:container p-4 md:p-6 flex">
       {/* Modal Box for Creating Post */}
       <ModalBox isVisible={isShowAddPost} onExit={() => setShowAddPost(false)}>
-        <CardHeader>
-          <div className="font-medium flex items-center justify-between">
-            <p className="text-lg font-medium">Share Something...</p>
-            <RxCross1
-              size={32}
-              className="inline-block hover:bg-zinc-300 rounded-lg p-2"
-              onClick={() => setShowAddPost(false)}
-            />
-          </div>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit}>
-            <div className="mb-4">
-              <Label htmlFor="title" className="mb-2">
-                {"What are you feeling right now?"}
-              </Label>
-              {/* <Input
-                name="title"
-                id="title"
-                values={values.title}
-                handleBlur={handleBlur}
-                handleChange={handleChange}
-                placeholder="Happy"
-                className="bg-zinc-100 h-10 md:h-12"
-                minLength={2}
-                maxLength={50}
-              /> */}
-              <Select>
-                <SelectTrigger className="w-full h-10 md:h-12 bg-zinc-100">
-                  <SelectValue
-                    placeholder="Tell me..."
+        {connected ? (
+          <>
+            <CardHeader>
+              <div className="font-medium flex items-center justify-between">
+                <p className="text-lg font-medium">Share Something...</p>
+                <RxCross1
+                  size={32}
+                  className="inline-block hover:bg-zinc-300 rounded-lg p-2"
+                  onClick={() => setShowAddPost(false)}
+                />
+              </div>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSubmit}>
+                <div className="mb-4 space-y-2">
+                  <Label htmlFor="title">
+                    {"What are you feeling right now?"}
+                  </Label>
+
+                  <Select
+                    value={values.title}
+                    onValueChange={(value) => setFieldValue("title", value)}
                     name="title"
                     id="title"
-                    handleBlur={handleBlur}
-                    handleChange={handleChange}
-                    value={values.title}
-                  />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Sad">Sad</SelectItem>
-                  <SelectItem value="Happy">Happy</SelectItem>
-                  <SelectItem value="Angry">Angry</SelectItem>
-                  <SelectItem value="Scared">Scared</SelectItem>
-                  <SelectItem value="Disgust">Disgusted</SelectItem>
-                </SelectContent>
-              </Select>
+                  >
+                    <SelectTrigger className="w-full h-10 md:h-12 bg-zinc-100">
+                      <SelectValue placeholder="Mix Emotions" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Sad">Sad</SelectItem>
+                      <SelectItem value="Happy">Happy</SelectItem>
+                      <SelectItem value="Angry">Angry</SelectItem>
+                      <SelectItem value="Scared">Scared</SelectItem>
+                      <SelectItem value="Disgust">Disgusted</SelectItem>
+                    </SelectContent>
+                  </Select>
 
-              <span className="text-red-500">
-                {errors.title && touched.title && errors.title}
-              </span>
-            </div>
-            <div className="mb-8">
-              <Label htmlFor="content" className="2">
-                {"We're here to listen..."}
-              </Label>
-              <Textarea
-                name="content"
-                id="content"
-                values={values.content}
-                handleBlur={handleBlur}
-                handleChange={handleChange}
-                className="bg-zinc-100 h-32"
-                placeholder="Keep holding up"
-              />
-              <span className="text-red-500">
-                {errors.content && touched.content && errors.content}
-              </span>
-            </div>
-            <Button
-              type="submit"
-              className="bg-rose-500 h-12 w-full rounded-full md:text-base hover:bg-rose-600"
-            >
-              {isLoading ? (
-                <>
-                  <div className="w-6 h-6 rounded-full border-2 border-white border-t-transparent animate-spin inline-block mr-2"></div>
-                  Loading...
-                </>
-              ) : (
-                "Submit"
-              )}
-            </Button>
-          </form>
-        </CardContent>
+                  <span className="text-red-500 text-sm font-medium ">
+                    {errors.title && touched.title && errors.title}
+                  </span>
+                </div>
+                <div className="mb-8 space-y-2">
+                  <Label htmlFor="content" className="2">
+                    {"We're here to listen..."}
+                  </Label>
+                  <Textarea
+                    name="content"
+                    id="content"
+                    values={values.content}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    className="bg-zinc-100 h-52 max-h-52"
+                    placeholder="Keep holding up"
+                  />
+                  <span className="text-red-500 text-sm font-medium ">
+                    {errors.content && touched.content && errors.content}
+                  </span>
+                </div>
+                <Button
+                  type="submit"
+                  className="bg-rose-500 h-10 md:h-12 w-full rounded-full md:text-base hover:bg-rose-600"
+                >
+                  {isLoading ? (
+                    <>
+                      <div className="w-6 h-6 rounded-full border-2 border-white border-t-transparent animate-spin inline-block mr-2"></div>
+                      Loading...
+                    </>
+                  ) : (
+                    "Submit"
+                  )}
+                </Button>
+              </form>
+            </CardContent>
+          </>
+        ) : (
+          <>
+            <CardHeader>
+              <div className="font-medium flex items-center justify-between">
+                <p className="text-lg">Connect to Phantom Wallet</p>
+                <RxCross1
+                  size={32}
+                  className="inline-block hover:bg-zinc-300 rounded-lg p-2"
+                  onClick={() => setShowAddPost(false)}
+                />
+              </div>
+            </CardHeader>
+          </>
+        )}
       </ModalBox>
 
       {/* Modal Box for Uploading Pictures */}
@@ -127,7 +153,9 @@ const Feed = () => {
       >
         <CardHeader>
           <div className="font-medium flex items-center justify-between">
-            <p className="text-lg">Feature is comming soon</p>
+            <p className="text-lg">
+              {(connected) ? "Feature is comming soon" : "Connect to Phantom Wallet"}
+            </p>
             <RxCross1
               size={32}
               className="inline-block hover:bg-zinc-300 rounded-lg p-2"
@@ -147,7 +175,14 @@ const Feed = () => {
           <CardHeader>
             <div className="flex items-center gap-3">
               <CardTitle>
-                <div className="h-10 w-10 bg-rose-500 rounded-full"></div>
+                <img
+                  src={
+                    user?.avatar ??
+                    "https://gravatar.com/avatar/$%7Bmd4(key)z?s=400&d=robohash&r=x"
+                  }
+                  alt="avatar"
+                  className="h-8 md:h-10 w-8 md:w-10 bg-rose-400 rounded-full"
+                />
               </CardTitle>
               <CardDescription
                 className="border bg-zinc-50 w-full p-2 md:px-5 rounded-full md:text-base cursor-pointer"
@@ -159,14 +194,14 @@ const Feed = () => {
           </CardHeader>
           <CardContent className="flex gap-2">
             <Button
-              className="hover:bg-zinc-100 md:text-base rounded-full flex-grow bg-white shadow-none text-black border"
+              className="hover:bg-zinc-100 h-10 md:h-12 md:text-base rounded-full flex-grow bg-white shadow-none text-black border"
               onClick={() => setShowSoonPost(true)}
             >
               <FcAddImage size={24} className="mr-2" />
               Images
             </Button>
             <Button
-              className="hover:bg-zinc-100 md:text-base rounded-full flex-grow bg-white shadow-none text-black border"
+              className="hover:bg-zinc-100 h-10 md:h-12 md:text-base rounded-full flex-grow bg-white shadow-none text-black border"
               onClick={() => setShowAddPost(true)}
             >
               <FcLike size={24} className="mr-2" />
@@ -177,7 +212,11 @@ const Feed = () => {
 
         {/* List of Blog Post */}
         <PostCard
-          name="Lirae Que Data"
+          image={
+            user?.avatar ??
+            "https://gravatar.com/avatar/$%7Bmd4(key)z?s=400&d=robohash&r=x"
+          }
+          name={user?.name ?? "Guest User"}
           body="Hello world my name is lirae Hello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is liraeHello world my name is lirae"
           title="sad"
         />

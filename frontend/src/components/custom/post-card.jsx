@@ -20,7 +20,11 @@ export const PostCard = ({ image, name, title, body }) => {
       <CardHeader>
         <div className="flex items-center gap-2">
           <CardTitle>
-            <div className="h-10 w-10 bg-rose-500 rounded-full"></div>
+            <img
+              src={image}
+              alt="avatar"
+              className="h-8 md:h-10 w-8 md:w-10 bg-rose-400 rounded-full"
+            />
           </CardTitle>
           <CardDescription className="text-black md:text-base font-medium">
             {name}
