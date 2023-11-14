@@ -1,11 +1,11 @@
-import { Card, CardContent, CardHeader } from "../../../../components/ui/card";
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from "../../../../components/ui/avatar";
+import { CardContent, CardHeader } from "../../../../components/ui/card";
 import { Button } from "../../../../components/ui/button";
-import { FaGithub , FaFacebook} from "react-icons/fa";
+import { FaGithub, FaFacebook } from "react-icons/fa";
 const OwnerSection = () => {
   const NavigateToGithub = () => {
     window.open("https://github.com/WannaCry081", "_blank");
@@ -15,7 +15,7 @@ const OwnerSection = () => {
   };
 
   return (
-    <Card className="sticky top-24">
+    <>
       <CardHeader>
         <div className="flex gap-2">
           <Avatar
@@ -32,17 +32,23 @@ const OwnerSection = () => {
         </div>
       </CardHeader>
       <CardContent className="flex justify-center flex-col gap-4">
-        <Button className="rounded-full h-12 text-base" onClick={NavigateToGithub}>
-          <FaGithub size={26} className="pr-2"/>
+        <Button
+          className="rounded-full h-12 text-base"
+          onClick={NavigateToGithub}
+        >
+          <FaGithub size={26} className="pr-2" />
           Follow me on GitHub
         </Button>
 
-        <Button className="rounded-full h-12 text-base bg-blue-500 hover:bg-blue-600" onClick={NavigateToFacebook}>
-          <FaFacebook size={26} className="pr-2"/>
+        <Button
+          className="rounded-full h-12 text-base bg-blue-500 hover:bg-blue-600"
+          onClick={NavigateToFacebook}
+        >
+          <FaFacebook size={26} className="pr-2" />
           Follow me on Facebook
         </Button>
       </CardContent>
-    </Card>
+    </>
   );
 };
 
