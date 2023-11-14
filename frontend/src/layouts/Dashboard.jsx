@@ -10,6 +10,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar";
 import { usePhantom } from "../hooks";
 import Routers from "../Routers";
+import { capitalizeString } from "../functions/capitalizeString";
 
 const Dashboard = () => {
   const {
@@ -32,7 +33,7 @@ const Dashboard = () => {
           </h1>
           <span className="flex items-center gap-3">
             <p className="hidden md:inline-block font-medium text-end">
-              {connected ? user?.name : "Welcome"}
+              {connected ? capitalizeString(user?.name ?? "John Doe") : "Welcome"}
             </p>
             <DropdownMenu>
               <DropdownMenuTrigger>
