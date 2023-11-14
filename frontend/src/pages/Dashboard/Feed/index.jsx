@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Card,
   CardContent,
@@ -13,17 +13,21 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../../components/ui/select";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "../../../components/ui/avatar";
 import { Label } from "../../../components/ui/label";
 import { Button } from "../../../components/ui/button";
 import { FcAddImage, FcLike } from "react-icons/fc";
 import { RxCross1 } from "react-icons/rx";
 import { PostCard } from "../../../components/custom/post-card";
 import { ModalBox } from "../../../components/custom/modal-box";
-import { useCreatePost } from "../../../hooks";
+import { useCreatePost, usePhantom } from "../../../hooks";
 import { Textarea } from "../../../components/ui/textarea";
 
-import { useWallet } from "@solana/wallet-adapter-react";
-import { useBlog } from "../../../context/Blog";
+import { MainSection, OwnerSection, ProfileSection } from "./sections";
 
 const Feed = () => {
   const [isShowAddPost, setShowAddPost] = useState(false);
@@ -41,8 +45,7 @@ const Feed = () => {
     },
   ] = useCreatePost();
 
-  const { user, posts } = useBlog();
-  const { connected } = useWallet();
+  const { user, posts, connected, publicKey } = usePhantom();
 
   return (
     <section className="mx-auto sm:container flex">
@@ -77,11 +80,21 @@ const Feed = () => {
                       <SelectValue placeholder="Mix Emotions" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="Sad">Sad</SelectItem>
-                      <SelectItem value="Happy">Happy</SelectItem>
-                      <SelectItem value="Angry">Angry</SelectItem>
-                      <SelectItem value="Scared">Scared</SelectItem>
-                      <SelectItem value="Disgust">Disgust</SelectItem>
+                      <SelectItem value="Happy">
+                        <SelectItemStyle name="Happy" color="bg-yellow-500" />
+                      </SelectItem>
+                      <SelectItem value="Sad">
+                        <SelectItemStyle name="Sad" color="bg-blue-500" />
+                      </SelectItem>
+                      <SelectItem value="Angry">
+                        <SelectItemStyle name="Angry" color="bg-red-500" />
+                      </SelectItem>
+                      <SelectItem value="Scared">
+                        <SelectItemStyle name="Scared" color="bg-violet-500" />
+                      </SelectItem>
+                      <SelectItem value="Disgust">
+                        <SelectItemStyle name="Disgust" color="bg-green-500" />
+                      </SelectItem>
                     </SelectContent>
                   </Select>
 
@@ -159,9 +172,18 @@ const Feed = () => {
         </CardHeader>
       </ModalBox>
 
-      <section className="w-1/2 hidden sm:block p-4">
-        {/* Still thinking */}
-        <Card></Card>
+      <section className="w-1/2 hidden sm:block p-4 relative">
+        {/* Profile Card here */}
+        <Card className="sticky top-20 lg:top-24">
+          <ProfileSection
+            image={
+              user?.avatar ??
+              "https://gravatar.com/avatar/$%7Bmd4(key)z?s=400&d=robohash&r=x"
+            }
+            name={user?.name ?? "John Doe"}
+            publicKey={publicKey?.toBase58().substring(0, 24) ?? null}
+          />
+        </Card>
       </section>
       <section className="w-full p-4">
         {/* Adding Blog Post here */}
@@ -169,20 +191,21 @@ const Feed = () => {
           <CardHeader>
             <div className="flex items-center gap-3">
               <CardTitle>
-                <img
-                  src={
-                    user?.avatar ??
-                    "https://gravatar.com/avatar/$%7Bmd4(key)z?s=400&d=robohash&r=x"
-                  }
-                  alt="avatar"
-                  className="h-8 md:h-10 w-8 md:w-10 bg-rose-400 rounded-full"
-                />
+                <Avatar className="bg-zinc-100 border w-12 h-12">
+                  <AvatarImage
+                    src={
+                      user?.avatar ??
+                      "https://gravatar.com/avatar/$%7Bmd4(key)z?s=400&d=robohash&r=x"
+                    }
+                  />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
               </CardTitle>
               <CardDescription
-                className="border bg-zinc-50 w-full p-2 md:px-5 rounded-full md:text-base cursor-pointer"
+                className=" w-full p-2 rounded-lg h-10 md:h-12 flex px-4 border items-center md:text-base cursor-pointer bg-zinc-100 "
                 onClick={() => setShowAddPost(true)}
               >
-                {"What's on your mind?"}
+                What's on your mind?
               </CardDescription>
             </div>
           </CardHeader>
@@ -205,19 +228,34 @@ const Feed = () => {
         </Card>
 
         {/* List of Blog Post */}
-        {posts.map((item) =>
-            <PostCard
-              key={item.account.id}
-              body={item.account.content}
-              title={item.account.title}
-            />
+        {posts.map((item) => (
+          <PostCard
+            key={item.account.id}
+            body={item.account.content}
+            title={item.account.title}
+          />
+        ))}
+
+        {connected ? null : (
+          <p className="text-center font-medium p-8">No Available Posts</p>
         )}
       </section>
       <section className="w-1/2 hidden lg:block p-4">
-        {/* GitHub Owner here */}
-        <Card></Card>
+        {/* GitHub Owner Card here */}
+        <Card className="sticky top-24">
+          <OwnerSection />
+        </Card>
       </section>
     </section>
+  );
+};
+
+const SelectItemStyle = ({ color, name }) => {
+  return (
+    <span className="flex items-center gap-2 font-medium">
+      <div className={`${color} w-2 h-2 rounded-full`}></div>
+      {name}
+    </span>
   );
 };
 
