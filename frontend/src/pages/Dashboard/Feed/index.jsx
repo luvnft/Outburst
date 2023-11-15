@@ -27,7 +27,6 @@ const Feed = () => {
     usePhantom();
 
   useEffect(() => {
-    console.log(transactionPending);
     if (!transactionPending) {
       setShowAddPost(false);
     }
