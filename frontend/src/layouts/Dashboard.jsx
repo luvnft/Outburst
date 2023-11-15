@@ -80,7 +80,6 @@ const Dashboard = () => {
                   className="md:text-base font-medium flex items-center gap-1"
                   onClick={connected ? null : onConnect}
                 >
-                  <IoWallet size={20} />
                   {connected ? (
                     <p className="text-sm text-zinc-500">
                       {publicKey?.toBase58().substring(0, 12)}...
@@ -89,11 +88,14 @@ const Dashboard = () => {
                     <>
                       {connecting ? (
                         <>
-                          <div className="w-6 h-6 rounded-full border-2 border-black border-t-transparent animate-spin inline-block mr-2"></div>
+                          <div className="w-4 h-4 rounded-full border-2 border-black border-t-transparent animate-spin inline-block mr-1"></div>
                           Loading...
                         </>
                       ) : (
-                        "Connect to Wallet"
+                        <>
+                          <IoWallet size={20} />
+                          <p>Connect to Wallet</p>
+                        </>
                       )}
                     </>
                   )}
