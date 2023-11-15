@@ -6,7 +6,7 @@ import { useBlog } from "../context/Blog";
 const usePhantom = () => {
   const [connecting, setConnecting] = useState(false);
   const { connected, select, publicKey } = useWallet();
-  const { user, disconnectWallet, posts } = useBlog();
+  const { user, disconnectWallet, posts, transactionPending } = useBlog();
 
   const onConnect = () => {
     setConnecting(true);
@@ -27,6 +27,7 @@ const usePhantom = () => {
     posts,
     publicKey,
     onConnect,
+    transactionPending
   };
 };
 

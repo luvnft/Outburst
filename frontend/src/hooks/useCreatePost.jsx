@@ -14,8 +14,8 @@ const useCreatePost = () => {
     },
     onSubmit: (values) => {
       setLoading(true);
-      setTimeout(() => {
-        createPost(values.title, values.content);
+      setTimeout( async () => {
+        await createPost(values.title, values.content);
         setLoading(false);
       }, 2000);
     },
