@@ -112,7 +112,7 @@ const Dashboard = () => {
                   onClick={() => setShowContact(true)}
                 >
                   <IoMailUnread size={20} />
-                  Contact Me
+                  $TIP
                 </DropdownMenuItem>
                 {connected ? (
                   <>
