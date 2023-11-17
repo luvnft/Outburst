@@ -27,6 +27,7 @@ const Dashboard = () => {
   const {
     connecting,
     connected,
+    initUser,
     user,
     disconnectWallet,
     publicKey,
@@ -118,7 +119,7 @@ const Dashboard = () => {
                   <>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem
-                      onClick={disconnectWallet}
+                      onClick={async () => { await initUser() ; disconnectWallet; } }
                       className="text-red-500 md:text-base font-medium flex items-center gap-1 hover:focus:bg-red-50 hover:focus:text-red-600"
                     >
                       <IoLogOut size={20} /> Logout
