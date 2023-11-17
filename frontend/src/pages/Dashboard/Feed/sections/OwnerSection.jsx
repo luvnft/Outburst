@@ -12,11 +12,11 @@ import {
 
 const OwnerSection = () => {
   const NavigateToInstagram = () => {
-    window.open("https://instagram.com/hahz5d", "_blank");
+    window.open("https://instagram.com/luvnft", "_blank");
   };
 
   const NavigateToLinkedin = () => {
-    window.open("https://linkedin.com/in/hahzterry", "_blank");
+    window.open("https://www.linkedin.com/company/71955818", "_blank");
   };
 
   return (
@@ -42,7 +42,7 @@ const OwnerSection = () => {
           onClick={NavigateToInstagram}
         >
           <FaInstagram size={26} className="pr-2" />
-          Follow me on Instagram
+          Follow us on Instagram
         </Button>
 
         <Button
@@ -50,7 +50,7 @@ const OwnerSection = () => {
           onClick={NavigateToLinkedin}
         >
           <FaLinkedin size={26} className="pr-2" />
-          Follow me on LinkedIn
+          Follow us on LinkedIn
         </Button>
       </CardContent>
     </>
