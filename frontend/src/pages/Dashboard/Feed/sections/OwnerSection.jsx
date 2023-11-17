@@ -31,7 +31,7 @@ const OwnerSection = () => {
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
           <div>
-            <p className="text-lg font-medium">The Wizard of Hahz</p>
+            <p className="text-lg font-medium">Hahz & Candy</p>
             <p className="text-xs text-zinc-400">What is your Web5 purpose? <a href="https://tipluvnft.com">Tips</a> are welcome.</p>
           </div>
         </div>
