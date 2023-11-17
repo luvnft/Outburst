@@ -27,12 +27,12 @@ const OwnerSection = () => {
             className="bg-zinc-100 h-12 w-12 cursor-pointer"
             onClick={NavigateToInstagram}
           >
-            <AvatarImage src="https://avatars.githubusercontent.com/u/71586774?v=4" />
+            <AvatarImage src="https://ibb.co/30HyCDX" />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
           <div>
             <p className="text-lg font-medium">The Wizard of Hahz</p>
-            <p className="text-xs text-zinc-400">Master Builder</p>
+            <p className="text-xs text-zinc-400">Tell your story on Solana blockchain.</p>
           </div>
         </div>
       </CardHeader>
