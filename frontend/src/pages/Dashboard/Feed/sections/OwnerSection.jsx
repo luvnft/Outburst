@@ -5,13 +5,18 @@ import {
 } from "../../../../components/ui/avatar";
 import { CardContent, CardHeader } from "../../../../components/ui/card";
 import { Button } from "../../../../components/ui/button";
-import { FaGithub, FaFacebook } from "react-icons/fa";
+import {
+  FaInstagram, // Instagram icon
+  FaLinkedin,  // LinkedIn icon
+} from "react-icons/fa";
+
 const OwnerSection = () => {
-  const NavigateToGithub = () => {
-    window.open("https://github.com/WannaCry081", "_blank");
+  const NavigateToInstagram = () => {
+    window.open("https://instagram.com/hahz5d", "_blank");
   };
-  const NavigateToFacebook = () => {
-    window.open("https://facebook.com/lirae-que-data", "_blank");
+
+  const NavigateToLinkedin = () => {
+    window.open("https://linkedin.com/in/hahzterry", "_blank");
   };
 
   return (
@@ -20,32 +25,32 @@ const OwnerSection = () => {
         <div className="flex gap-2">
           <Avatar
             className="bg-zinc-100 h-12 w-12 cursor-pointer"
-            onClick={NavigateToGithub}
+            onClick={NavigateToInstagram}
           >
             <AvatarImage src="https://avatars.githubusercontent.com/u/71586774?v=4" />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
           <div>
-            <p className="text-lg font-medium">WannaCry081</p>
-            <p className="text-xs text-zinc-400">BS Computer Engineer</p>
+            <p className="text-lg font-medium">The Wizard of Hahz</p>
+            <p className="text-xs text-zinc-400">Master Builder</p>
           </div>
         </div>
       </CardHeader>
       <CardContent className="flex justify-center flex-col gap-4">
         <Button
           className="rounded-full h-12 text-base"
-          onClick={NavigateToGithub}
+          onClick={NavigateToInstagram}
         >
-          <FaGithub size={26} className="pr-2" />
-          Follow me on GitHub
+          <FaInstagram size={26} className="pr-2" />
+          Follow me on Instagram
         </Button>
 
         <Button
           className="rounded-full h-12 text-base bg-blue-500 hover:bg-blue-600"
-          onClick={NavigateToFacebook}
+          onClick={NavigateToLinkedin}
         >
-          <FaFacebook size={26} className="pr-2" />
-          Follow me on Facebook
+          <FaLinkedin size={26} className="pr-2" />
+          Follow me on LinkedIn
         </Button>
       </CardContent>
     </>
