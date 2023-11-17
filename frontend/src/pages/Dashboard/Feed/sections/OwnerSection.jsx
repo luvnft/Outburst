@@ -35,7 +35,7 @@ const OwnerSection = () => {
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
           <div>
-            <p className="text-lg font-medium">Hahz & Candy: LUV NFT Founders </p>
+            <p className="text-lg font-medium">Hahz & Candy: Creators </p>
            <p className="text-xs text-zinc-400">We've built a worldwide united social media platform free from algorithms,
               designed with a higher purpose of helping others. Share a Tip link as evidence of your LUV. 
              "<span className="italic">IN LUV WE TRUST</span>"</p>
@@ -63,7 +63,7 @@ const OwnerSection = () => {
           className="rounded-full h-12 text-base bg-green-500 hover:bg-green-600"
           onClick={NavigateToTip}
         >
-          Tip us!
+          Tip!
         </Button>
       </CardContent>
     </>
