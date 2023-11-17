@@ -54,8 +54,8 @@ const Dashboard = () => {
       <header className="h-16 md:h-20 shadow-md px-4 sticky top-0 bg-white z-10">
         <div className="sm:container mx-auto flex items-center h-full justify-between">
           <h1 className="text-2xl md:text-4xl font-extrabold">
-            Out
-            <span className="text-rose-500">Burst</span>
+            Sol
+            <span className="text-rose-500">Story</span>
           </h1>
           <span className="flex items-center gap-3">
             <p className="hidden sm:inline-block font-medium text-end">
