@@ -6,8 +6,8 @@ import {
 import { CardContent, CardHeader } from "../../../../components/ui/card";
 import { Button } from "../../../../components/ui/button";
 import {
-  FaInstagram, // Instagram icon
-  FaLinkedin,  // LinkedIn icon
+  FaInstagram,
+  FaLinkedin,
 } from "react-icons/fa";
 
 const OwnerSection = () => {
@@ -19,6 +19,10 @@ const OwnerSection = () => {
     window.open("https://www.linkedin.com/company/71955818", "_blank");
   };
 
+  const NavigateToTip = () => {
+    window.open("https://tip.luvnft.com", "_blank");
+  };
+
   return (
     <>
       <CardHeader>
@@ -27,12 +31,14 @@ const OwnerSection = () => {
             className="bg-zinc-100 h-12 w-12 cursor-pointer"
             onClick={NavigateToInstagram}
           >
-            <AvatarImage src="https://ibb.co/30HyCDX" />
+            <AvatarImage src="https://i.ibb.co/NLz6y8h/IMG-8674-2.jpg" />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
           <div>
-            <p className="text-lg font-medium">Hahz & Candy</p>
-            <p className="text-xs text-zinc-400">What is your Web5 purpose? <a href="https://tipluvnft.com">Tips</a> are welcome.</p>
+            <p className="text-lg font-medium">Hahz & Candy: LUV NFT Founders </p>
+           <p className="text-xs text-zinc-400">We've built a worldwide united social media platform free from algorithms,
+              designed with a higher purpose of helping others. Share a Tip link as evidence of your LUV. 
+             "<span className="italic">IN LUV WE TRUST</span>"</p>
           </div>
         </div>
       </CardHeader>
@@ -51,6 +57,13 @@ const OwnerSection = () => {
         >
           <FaLinkedin size={26} className="pr-2" />
           Follow us on LinkedIn
+        </Button>
+
+        <Button
+          className="rounded-full h-12 text-base bg-green-500 hover:bg-green-600"
+          onClick={NavigateToTip}
+        >
+          Tip us!
         </Button>
       </CardContent>
     </>
