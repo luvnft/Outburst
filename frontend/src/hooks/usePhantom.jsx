@@ -8,7 +8,8 @@ const usePhantom = () => {
   const { connected, select, publicKey } = useWallet();
   const { user, disconnectWallet, posts, transactionPending, initUser } = useBlog();
 
-  const onConnect = () => {
+  const onConnect = async () => {
+    await initUser();
     setConnecting(true);
     select(PhantomWalletName);
   };
@@ -27,7 +28,6 @@ const usePhantom = () => {
     posts,
     publicKey,
     onConnect,
-    initUser,
     transactionPending
   };
 };

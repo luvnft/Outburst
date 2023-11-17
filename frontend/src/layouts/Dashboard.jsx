@@ -27,7 +27,6 @@ const Dashboard = () => {
   const {
     connecting,
     connected,
-    initUser,
     user,
     disconnectWallet,
     publicKey,
@@ -52,7 +51,7 @@ const Dashboard = () => {
       </ModalBox>
 
       {/* Navigation Bar */}
-      <header className="h-16 md:h-20 shadow-md px-4 sticky top-0 bg-white">
+      <header className="h-16 md:h-20 shadow-md px-4 sticky top-0 bg-white z-10">
         <div className="sm:container mx-auto flex items-center h-full justify-between">
           <h1 className="text-2xl md:text-4xl font-extrabold">
             Out
@@ -119,7 +118,7 @@ const Dashboard = () => {
                   <>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem
-                      onClick={async () => { await initUser() ; disconnectWallet; } }
+                      onClick={ disconnectWallet }
                       className="text-red-500 md:text-base font-medium flex items-center gap-1 hover:focus:bg-red-50 hover:focus:text-red-600"
                     >
                       <IoLogOut size={20} /> Logout
