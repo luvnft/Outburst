@@ -41,7 +41,7 @@ const Dashboard = () => {
             user?.avatar ??
             "https://gravatar.com/avatar/$%7Bmd4(key)z?s=400&d=robohash&r=x"
           }
-          name={user?.name ?? "John Doe"}
+          name={user?.name ?? "Jamal Doe"}
           publicKey={publicKey?.toBase58() ?? null}
         />
       </ModalBox>
