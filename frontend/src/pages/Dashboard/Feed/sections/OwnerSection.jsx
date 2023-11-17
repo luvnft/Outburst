@@ -37,7 +37,8 @@ const OwnerSection = () => {
           <div>
             <p className="text-lg font-medium">Hahz & Candy: Creators </p>
            <p className="text-xs text-zinc-400">We've built a worldwide united social media platform free from algorithms,
-              designed with a higher purpose of helping others. Share a Tip link as evidence of your LUV. 
+              designed with a higher purpose of helping others. Get paid for showing the world your higher self, 
+              you don't have to sell your $SOL to the 😈. Tip with link as evidence of your LUV. 
              "<span className="italic">IN LUV WE TRUST</span>"</p>
           </div>
         </div>
