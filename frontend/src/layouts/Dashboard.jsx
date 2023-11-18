@@ -30,7 +30,7 @@ const Dashboard = () => {
     user,
     disconnectWallet,
     publicKey,
-    onConnect,
+    onConnectWallet,
   } = usePhantom();
 
   return (
@@ -78,7 +78,7 @@ const Dashboard = () => {
               <DropdownMenuContent className="relative right-2 md:right-0">
                 <DropdownMenuItem
                   className="md:text-base font-medium flex items-center gap-1"
-                  onClick={connected ? null : onConnect}
+                  onClick={connected ? null : onConnectWallet}
                 >
                   {connected ? (
                     <p className="text-sm text-zinc-500">
