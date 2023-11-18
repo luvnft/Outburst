@@ -30,7 +30,9 @@ const Dashboard = () => {
     user,
     disconnectWallet,
     publicKey,
+    initialized,
     onConnect,
+    initializeUser,
   } = usePhantom();
 
   return (
@@ -78,12 +80,20 @@ const Dashboard = () => {
               <DropdownMenuContent className="relative right-2 md:right-0">
                 <DropdownMenuItem
                   className="md:text-base font-medium flex items-center gap-1"
-                  onClick={connected ? null : onConnect}
+                  onClick={
+                    connected
+                      ? initialized
+                        ? null
+                        : initializeUser
+                      : onConnect
+                  }
                 >
                   {connected ? (
-                    <p className="text-sm text-zinc-500">
-                      {publicKey?.toBase58().substring(0, 12)}...
-                    </p>
+                    (initialized) ? 
+                      <p className="text-sm text-zinc-500">
+                        {publicKey?.toBase58().substring(0, 12)}...
+                      </p>
+                    : <p>Initialize User</p>
                   ) : (
                     <>
                       {connecting ? (
@@ -118,7 +128,7 @@ const Dashboard = () => {
                   <>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem
-                      onClick={ disconnectWallet }
+                      onClick={disconnectWallet}
                       className="text-red-500 md:text-base font-medium flex items-center gap-1 hover:focus:bg-red-50 hover:focus:text-red-600"
                     >
                       <IoLogOut size={20} /> Logout
