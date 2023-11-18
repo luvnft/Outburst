@@ -6,11 +6,12 @@ import { useBlog } from "../context/Blog";
 const usePhantom = () => {
   const [connecting, setConnecting] = useState(false);
   const { connected, select, publicKey } = useWallet();
-  const { user, disconnectWallet, posts, transactionPending } = useBlog();
+  const { user, disconnectWallet, posts, transactionPending, initUser } = useBlog();
 
-  const onConnect = () => {
+  const onConnect = async () => {
     setConnecting(true);
     select(PhantomWalletName);
+    await initUser();
   };
 
   useEffect(() => {
