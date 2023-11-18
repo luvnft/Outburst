@@ -9,9 +9,9 @@ const usePhantom = () => {
   const { user, disconnectWallet, posts, transactionPending, initUser } = useBlog();
 
   const onConnect = async () => {
-    await initUser();
     setConnecting(true);
     select(PhantomWalletName);
+    await initUser();
   };
 
   useEffect(() => {
